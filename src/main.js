@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Button,
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
+import Form from './components/Form';
 
-export default class WordsPlay extends Component {
+const { width, height } = Dimensions.get('window');
+
+class WordsPlay extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
+        <Text style={styles.welcomeLabel}>
+          welcome to WordsPlay !
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+        <Form
+          formStyle={styles.formStyle}
+          label="Put your word to start playing!"
+          buttonText="Start"
+        />
+        <Text style={styles.credits}>
+          Made by Szymon Sitko 2016
         </Text>
       </View>
     );
@@ -28,18 +34,29 @@ export default class WordsPlay extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#99bbff',
   },
-  welcome: {
-    fontSize: 20,
+  credits: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    color: 'black',
+    textAlign: 'center'
+  },
+  welcomeLabel: {
+    fontFamily: 'Special-Elite',
     textAlign: 'center',
-    margin: 10,
+    fontSize: 42,
+    color: 'black',
+    marginTop: height * .05,
+    backgroundColor: '#ff4d4d'
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  formStyle: {
+    marginTop: height * .1
   },
+
 });
+
+export default WordsPlay;
