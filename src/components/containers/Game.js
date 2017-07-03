@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { scoreCalculator, timeCalculator } from '../../lib/ScoreCalculator';
+import { scoreCalculator, timeCalculator, tagGenerator } from '../../lib/ScoreCalculator';
 
 class Game extends Component {
   state = {
     countdownTime: timeCalculator(scoreCalculator(this.props.cleanInput)),
+    scoreToWin: scoreCalculator(this.props.cleanInput),
     renderCounterLabels: false,
     preCounter: 'Ready...',
     inputText: ''
@@ -46,7 +47,7 @@ class Game extends Component {
   renderHint() {
     let renderTag = '';
     if (!this.state.inputText || this.state.inputText.length > 0) {
-      !isNaN(this.state.inputText) ? renderTag = <Text>Keep on trying...</Text> : renderTag = <Text style={{ color: 'red' }}>This is not a number, sorry!</Text>;
+      !isNaN(this.state.inputText) ? renderTag = <Text>{tagGenerator(this.state.scoreToWin, this.state.inputText)}</Text> : renderTag = <Text style={{ color: 'red' }}>This is not a number, sorry!</Text>;
     }
     return renderTag;
   }
