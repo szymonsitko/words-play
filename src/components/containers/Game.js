@@ -9,11 +9,15 @@ class Game extends Component {
     scoreToWin: scoreCalculator(this.props.cleanInput),
     renderCounterLabels: false,
     preCounter: 'Ready...',
-    inputText: ''
+    passedInput: false
   }
 
   componentWillMount() {
     this.preCountingMessage();
+  }
+
+  resultCheck() {
+    this.state.inputText == this.state.scoreToWin ? this.stopCountdownTimer() : !this.stopCountdownTimer();
   }
 
   preCountingMessage() {
@@ -24,30 +28,40 @@ class Game extends Component {
         this.setState({ preCounter: 'Set...' });
       }
       if (this.state.readySetGoCounter === 0) {
-        this.setState({ preCounter: 'Go!'});
-        this.setState({ renderCounterLabels: true });
+        this.setState({
+          renderCounterLabels: true,
+          preCounter: 'Go!'
+        });
         this.startCountdownTimer();
       }
     }, 1000);
   }
 
   startCountdownTimer() {
-    let timer = setInterval(() => {
-      this.setState({ countdownTime: this.state.countdownTime - 1 });
-      if (this.state.countdownTime <= 0) {
-        this.stopCountdownTimer(timer);
-      }
-    }, 1000);
+    this.setState({
+      timer: setInterval(() => {
+        this.setState({ countdownTime: this.state.countdownTime - 1 });
+        if (this.state.countdownTime <= 0) {
+          this.stopCountdownTimer(this.state.timer);
+        }
+      }, 1000)
+    })
+
+
   }
 
-  stopCountdownTimer(timer) {
-    clearInterval(timer);
+  stopCountdownTimer() {
+    clearInterval(this.state.timer);
   }
 
   renderHint() {
     let renderTag = '';
     if (!this.state.inputText || this.state.inputText.length > 0) {
-      !isNaN(this.state.inputText) ? renderTag = <Text>{tagGenerator(this.state.scoreToWin, this.state.inputText)}</Text> : renderTag = <Text style={{ color: 'red' }}>This is not a number, sorry!</Text>;
+      if (this.state.passedInput) {
+        !isNaN(this.state.inputText) ? renderTag = <Text>{tagGenerator(this.state.scoreToWin, this.state.inputText)}</Text> : renderTag = <Text style={{ color: 'red' }}>This is not a number, sorry!</Text>;
+      } else {
+        renderTag = <Text>Give it a shot right now!</Text>;
+      }
     }
     return renderTag;
   }
@@ -58,7 +72,7 @@ class Game extends Component {
         <Text style={styles.gameLabel}>Counter has started!</Text>
         <Text style={styles.insertedText}>{this.props.inputText}</Text>
         <Text style={styles.counter}> Just {this.state.countdownTime} seconds left!</Text>
-        <TextInput onChangeText={(text) => this.setState({inputText: text})}/>
+        <TextInput onChangeText={(text) => {this.setState({inputText: text, passedInput: true}); this.resultCheck()}}/>
         {this.renderHint()}
       </View>
     );
@@ -92,14 +106,11 @@ const mapStateToProps = ({ game }) => {
 
 export default connect(mapStateToProps)(Game);
 
-//
-// switch (readySetGoCounter) {
-//   case 3:
-//     console.log("Counter starts.");
-//   case 2:
-//     this.setState({ preCounter: 'Ready...'});
-//   case 1:
-//     this.setState({ preCounter: 'Set...'});
-//   case 0:
-//     this.setState({ preCounter: 'Go!'});
-// }
+// Clean timer code snippet
+
+// let timer = setInterval(() => {
+//   this.setState({ countdownTime: this.state.countdownTime - 1 });
+//   if (this.state.countdownTime <= 0) {
+//     this.stopCountdownTimer(timer);
+//   }
+// }, 1000);
