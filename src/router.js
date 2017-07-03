@@ -8,7 +8,7 @@ export const RouterComponent = () => {
   return (
     <Router>
 
-    <Scene key="init">
+    <Scene key="init" >
       <Scene initial key="welcome" component={Welcome} hideNavBar={true} />
     </Scene>
 

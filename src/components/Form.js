@@ -30,7 +30,7 @@ class Form extends Component {
       const rawInput = this.state.inputText;
       const cleanedInput = inputCleaner(this.state.inputText);
       this.props.storeUserInput(rawInput, cleanedInput);
-      Actions.game();
+      Actions.game({ reset: true });
     }
   }
 
@@ -38,7 +38,7 @@ class Form extends Component {
     if (this.state.displayWarning) {
     return (
       <Text style={styles.warningLabel}>
-        Word must be longer than zero characters!
+        Input must be longer than zero characters!
       </Text>
       );
     }
