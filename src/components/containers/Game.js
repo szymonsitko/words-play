@@ -1,23 +1,34 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { scoreCalculator, timeCalculator, tagGenerator } from '../../lib/ScoreCalculator';
 
+const { width, height } = Dimensions.get('window');
+const INITIAL_STATE = {
+
+};
+
 class Game extends Component {
   state = {
-    countdownTime: timeCalculator(scoreCalculator(this.props.cleanInput)),
+    countdownTime: 'x',
     scoreToWin: scoreCalculator(this.props.cleanInput),
     renderCounterLabels: false,
     preCounter: 'Ready...',
-    passedInput: false
+    passedInput: false,
   }
 
   componentWillMount() {
     this.preCountingMessage();
   }
 
-  resultCheck() {
-    this.state.inputText == this.state.scoreToWin ? this.stopCountdownTimer() : !this.stopCountdownTimer();
+  resultCheck(text) {
+    if (this.state.scoreToWin == text) {
+      this.stopCountdownTimer();
+      this.setState({ preCounter: 'You won!' });
+    }
+    // Do something on success state!
+    // Probably better to implement if statement
+    //
   }
 
   preCountingMessage() {
@@ -30,7 +41,8 @@ class Game extends Component {
       if (this.state.readySetGoCounter === 0) {
         this.setState({
           renderCounterLabels: true,
-          preCounter: 'Go!'
+          preCounter: 'Go!',
+          countdownTime: timeCalculator(scoreCalculator(this.props.cleanInput))
         });
         this.startCountdownTimer();
       }
@@ -42,12 +54,13 @@ class Game extends Component {
       timer: setInterval(() => {
         this.setState({ countdownTime: this.state.countdownTime - 1 });
         if (this.state.countdownTime <= 0) {
-          this.stopCountdownTimer(this.state.timer);
+          this.stopCountdownTimer();
+          this.setState({ preCounter: 'You lost!' });
+          // Do something on fail state!
+          //
         }
       }, 1000)
-    })
-
-
+    });
   }
 
   stopCountdownTimer() {
@@ -58,7 +71,7 @@ class Game extends Component {
     let renderTag = '';
     if (!this.state.inputText || this.state.inputText.length > 0) {
       if (this.state.passedInput) {
-        !isNaN(this.state.inputText) ? renderTag = <Text>{tagGenerator(this.state.scoreToWin, this.state.inputText)}</Text> : renderTag = <Text style={{ color: 'red' }}>This is not a number, sorry!</Text>;
+        !isNaN(this.state.inputText) ? renderTag = <Text style={styles.hintLabel}>{tagGenerator(this.state.scoreToWin, this.state.inputText)}</Text> : renderTag = <Text style={{ ...styles.hintLabel, color: 'red' }}>This is not a number, sorry!</Text>;
       } else {
         renderTag = <Text>Give it a shot right now!</Text>;
       }
@@ -69,10 +82,8 @@ class Game extends Component {
   renderCounterLabels() {
     return (
       <View>
-        <Text style={styles.gameLabel}>Counter has started!</Text>
-        <Text style={styles.insertedText}>{this.props.inputText}</Text>
-        <Text style={styles.counter}> Just {this.state.countdownTime} seconds left!</Text>
-        <TextInput onChangeText={(text) => {this.setState({inputText: text, passedInput: true}); this.resultCheck()}}/>
+        <Text style={styles.insertedText}>You have inserted: {this.props.inputText}</Text>
+        <TextInput onChangeText={(text) => {this.setState({inputText: text, passedInput: true}); this.resultCheck(text); }}/>
         {this.renderHint()}
       </View>
     );
@@ -80,23 +91,54 @@ class Game extends Component {
 
   render() {
     return (
-      <View>
-        <Text>{this.state.preCounter}</Text>
+      <View style={styles.container}>
+        <Text style={styles.preCounterLabel}>{this.state.preCounter}</Text>
         {this.state.renderCounterLabels ? this.renderCounterLabels() : !this.renderCounterLabels()}
+        <Text style={styles.counterLabel}> Just {this.state.countdownTime} seconds left!</Text>
       </View>
     );
   };
 }
 
 const styles = {
-  gameLabel: {
-
+  container: {
+    flex: 1,
+    margin: 6,
+    alignItems: 'center',
+    backgroundColor: '#99bbff',
   },
-  counter: {
-
+  hintLabel: {
+    textAlign: 'center',
+    fontSize: 14,
+    marginTop: height *.005,
+    marginTop: height *.005,
+  },
+  counterLabel: {
+    position: 'absolute',
+    fontFamily: 'Special-Elite',
+    backgroundColor: '#ffeb99',
+    padding: 4,
+    fontSize: 24,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    color: 'black',
+    textAlign: 'center'
   },
   insertedText: {
-
+    fontFamily: 'Special-Elite',
+    fontSize: 22,
+    color: 'black',
+    backgroundColor: '#db70b8',
+  },
+  preCounterLabel: {
+    fontFamily: 'Special-Elite',
+    textAlign: 'center',
+    fontSize: 42,
+    color: 'black',
+    marginTop: height * .05,
+    marginBottom: height * .05,
+    backgroundColor: '#ff4d4d'
   }
 }
 
@@ -105,12 +147,3 @@ const mapStateToProps = ({ game }) => {
 }
 
 export default connect(mapStateToProps)(Game);
-
-// Clean timer code snippet
-
-// let timer = setInterval(() => {
-//   this.setState({ countdownTime: this.state.countdownTime - 1 });
-//   if (this.state.countdownTime <= 0) {
-//     this.stopCountdownTimer(timer);
-//   }
-// }, 1000);

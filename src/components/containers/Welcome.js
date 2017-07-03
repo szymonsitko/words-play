@@ -31,6 +31,7 @@ export const Welcome = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    margin: 6,
     alignItems: 'center',
     backgroundColor: '#99bbff',
   },
