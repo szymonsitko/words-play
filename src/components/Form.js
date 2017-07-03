@@ -38,7 +38,7 @@ class Form extends Component {
     if (this.state.displayWarning) {
     return (
       <Text style={styles.warningLabel}>
-        Input must be longer than zero characters!
+        Word must be longer than zero characters!
       </Text>
       );
     }

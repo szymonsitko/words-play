@@ -18,6 +18,7 @@ export const Welcome = () => {
         Welcome to WordsPlay !
       </Text>
       <Form
+        testFunction={getTestValue => {this.getTestValue = getTestValue}}
         formStyle={styles.formStyle}
         label="Put your word to start playing!"
         buttonText="Start"

@@ -8,5 +8,5 @@ export const scoreCalculator = cleanInput => {
 }
 
 export const timeCalculator = score => {
-  return score / 2;
+  return Math.floor(score / 2);
 }
