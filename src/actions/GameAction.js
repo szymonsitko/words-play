@@ -1,8 +1,8 @@
 import { STORE_USER_INPUT } from './types';
 
-export const storeUserInput = input => {
+export const storeUserInput = (rawInput, cleanedInput) => {
   return {
     type: STORE_USER_INPUT,
-    payload: input
+    payload: { raw: rawInput, clean: cleanedInput }
   }
 }

@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { storeUserInput } from '../actions';
 import { inputCleaner } from '../lib/InputCleaner';
@@ -16,6 +17,7 @@ const { width, height } = Dimensions.get('window');
 class Form extends Component {
   state = {
     inputText: '',
+    cleanInput: '',
     displayWarning: false
   }
 
@@ -25,8 +27,10 @@ class Form extends Component {
     } else {
       this.setState({ displayWarning: false });
       // Further reducer based logic action here!
+      const rawInput = this.state.inputText;
       const cleanedInput = inputCleaner(this.state.inputText);
-      this.props.storeUserInput(cleanedInput);
+      this.props.storeUserInput(rawInput, cleanedInput);
+      Actions.game();
     }
   }
 
