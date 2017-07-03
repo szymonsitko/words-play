@@ -6,12 +6,39 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import { connect } from 'react-redux';
+import { storeUserInput } from '../actions';
+import { inputCleaner } from '../lib/InputCleaner';
 import Button from './Button';
 
 const { width, height } = Dimensions.get('window');
 
 class Form extends Component {
-  state = { inputText: '' }
+  state = {
+    inputText: '',
+    displayWarning: false
+  }
+
+  acceptUserInput() {
+    if (this.state.inputText < 1) {
+      this.setState({ displayWarning: true });
+    } else {
+      this.setState({ displayWarning: false });
+      // Further reducer based logic action here!
+      const cleanedInput = inputCleaner(this.state.inputText);
+      this.props.storeUserInput(cleanedInput);
+    }
+  }
+
+  displayWarning() {
+    if (this.state.displayWarning) {
+    return (
+      <Text style={styles.warningLabel}>
+        Word must be longer than zero characters!
+      </Text>
+      );
+    }
+  }
 
   render() {
     return (
@@ -22,7 +49,8 @@ class Form extends Component {
         onChangeText={(text) => this.setState({inputText: text})}
         value={this.state.inputText}
       />
-        <Button onPress={() => console.log("goto")}>{this.props.buttonText}</Button>
+        <Button style={styles} onPress={() => this.acceptUserInput()}>{this.props.buttonText}</Button>
+        {this.displayWarning()}
       </View>
     );
   };
@@ -45,7 +73,26 @@ const styles = {
     backgroundColor: '#ffeb99',
     fontFamily: 'Special-Elite',
     color: 'black'
+  },
+  warningLabel: {
+    textAlign: 'center',
+    marginTop: 5
+  },
+  buttonTextStyle: {
+    fontFamily: 'Special-Elite',
+    justifyContent: 'center',
+    fontSize: 42,
+    backgroundColor: '#db70b8',
+    color: 'black',
+  },
+  buttonAnimationStyle: {
+    alignItems: 'center',
+    justifyContent: 'space-between'
   }
 }
 
-export default Form;
+const mapStateToProps = ({ game }) => {
+  return game;
+}
+
+export default connect(mapStateToProps, { storeUserInput })(Form);
