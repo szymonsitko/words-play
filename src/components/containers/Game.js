@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Dimensions } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { scoreCalculator, timeCalculator, tagGenerator } from '../../lib/ScoreCalculator';
+import { sleep } from '../../lib/Sleep';
 
 const { width, height } = Dimensions.get('window');
 const INITIAL_STATE = {
@@ -21,14 +23,18 @@ class Game extends Component {
     this.preCountingMessage();
   }
 
+  goToResultsPage() {
+    sleep(1500).then(() => {
+      Actions.result();
+    });
+  }
+
   resultCheck(text) {
     if (this.state.scoreToWin == text) {
       this.stopCountdownTimer();
       this.setState({ preCounter: 'You won!' });
-    }
-    // Do something on success state!
-    // Probably better to implement if statement
-    //
+      this.goToResultsPage();
+    };
   }
 
   preCountingMessage() {
@@ -58,6 +64,7 @@ class Game extends Component {
           this.setState({ preCounter: 'You lost!' });
           // Do something on fail state!
           //
+          this.goToResultsPage();
         }
       }, 1000)
     });

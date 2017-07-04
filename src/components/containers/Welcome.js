@@ -5,7 +5,8 @@ import {
   View,
   Modal,
   Dimensions,
-  TouchableHighlight
+  TouchableHighlight,
+  ScrollView
 } from 'react-native';
 import { INSTRUCTIONS } from '../../constants/constants';
 import Button from '../Button';
@@ -36,7 +37,7 @@ class Welcome extends Component {
             onRequestClose={() => {this.setState({ modalVisibility: false })}}
             >
            <View style={styles.modalStyles.container}>
-            <View>
+            <ScrollView>
               <Text style={styles.modalStyles.instrucionsLabel}>Game Instructions</Text>
               <Text style={styles.modalStyles.instructionsContent}>{INSTRUCTIONS}</Text>
               <Text
@@ -47,7 +48,7 @@ class Welcome extends Component {
                 >
                 Back to Main
               </Text>
-            </View>
+            </ScrollView>
            </View>
           </Modal>
           <Text onPress={() => this.setState({ modalVisibility: true })} style={styles.credits}>Instructions</Text>
