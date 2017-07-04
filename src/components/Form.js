@@ -26,7 +26,6 @@ class Form extends Component {
       this.setState({ displayWarning: true });
     } else {
       this.setState({ displayWarning: false });
-      // Further reducer based logic action here!
       const rawInput = this.state.inputText;
       const cleanedInput = inputCleaner(this.state.inputText);
       this.props.storeUserInput(rawInput, cleanedInput);

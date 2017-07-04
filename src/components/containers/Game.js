@@ -2,18 +2,16 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { storeGameResult } from '../../actions';
 import { scoreCalculator, timeCalculator, tagGenerator } from '../../lib/ScoreCalculator';
 import { sleep } from '../../lib/Sleep';
 
 const { width, height } = Dimensions.get('window');
-const INITIAL_STATE = {
-
-};
 
 class Game extends Component {
   state = {
     countdownTime: 'x',
-    scoreToWin: scoreCalculator(this.props.cleanInput),
+    scoreToWin: scoreCalculator(this.props.game.cleanInput),
     renderCounterLabels: false,
     preCounter: 'Ready...',
     passedInput: false,
@@ -24,15 +22,25 @@ class Game extends Component {
   }
 
   goToResultsPage() {
-    sleep(1500).then(() => {
+    sleep(2500).then(() => {
+      const gameAnalytics = {
+
+      };
+      this.props.storeGameResult({
+        scoreTarget: this.state.scoreToWin,
+        timeTotal: timeCalculator(this.props.game.cleanInput),
+        timeLeft: this.state.countdownTime,
+        userWon: this.state.userWonGame
+      });
       Actions.result();
     });
   }
 
   resultCheck(text) {
     if (this.state.scoreToWin == text) {
+      const result = 'win';
       this.stopCountdownTimer();
-      this.setState({ preCounter: 'You won!' });
+      this.setState({ preCounter: 'You won!', userWonGame: true });
       this.goToResultsPage();
     };
   }
@@ -48,7 +56,7 @@ class Game extends Component {
         this.setState({
           renderCounterLabels: true,
           preCounter: 'Go!',
-          countdownTime: timeCalculator(scoreCalculator(this.props.cleanInput))
+          countdownTime: timeCalculator(this.props.game.cleanInput)
         });
         this.startCountdownTimer();
       }
@@ -60,10 +68,9 @@ class Game extends Component {
       timer: setInterval(() => {
         this.setState({ countdownTime: this.state.countdownTime - 1 });
         if (this.state.countdownTime <= 0) {
+          const result = 'loose';
           this.stopCountdownTimer();
-          this.setState({ preCounter: 'You lost!' });
-          // Do something on fail state!
-          //
+          this.setState({ preCounter: 'You lost!', userWonGame: false });
           this.goToResultsPage();
         }
       }, 1000)
@@ -89,7 +96,7 @@ class Game extends Component {
   renderCounterLabels() {
     return (
       <View>
-        <Text style={styles.insertedText}>You have inserted: {this.props.inputText}</Text>
+        <Text style={styles.insertedText}>You have inserted: {this.props.game.inputText}</Text>
         <TextInput onChangeText={(text) => {this.setState({inputText: text, passedInput: true}); this.resultCheck(text); }}/>
         {this.renderHint()}
       </View>
@@ -148,8 +155,8 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({ game }) => {
-  return game;
+const mapStateToProps = ({ game, result }) => {
+  return { game, result };
 }
 
-export default connect(mapStateToProps)(Game);
+export default connect(mapStateToProps, { storeGameResult })(Game);

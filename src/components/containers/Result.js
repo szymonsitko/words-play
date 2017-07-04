@@ -9,13 +9,57 @@ class Result extends Component {
 
   render() {
     return (
-      <View>
-        <Text>You {this.props.gameResult} the game!</Text>
-        <Text onPress={this.resetGame}>Try again</Text>
-        <Text onPress={() => {BackHandler.exitApp()} }>Quit</Text>
+      <View style={styles.container}>
+        <Text style={styles.resultsLabel}>You <Text style={styles.result}>{this.props.userWon ? 'won' : 'lost'}</Text> the game!</Text>
+        <Text>Game Brief details</Text>
+        <Text>Your score to achieve: {this.props.scoreTarget} points</Text>
+        <Text>Total game time: {this.props.timeTotal} second(s)</Text>
+        <Text>Time used overall: {this.props.timeTotal - this.props.timeLeft} second(s)</Text>
+        <Text style={styles.tryAgainLabel} onPress={this.resetGame}>Try again</Text>
+        <Text style={styles.quitLabel} onPress={() => {BackHandler.exitApp()} }>Quit</Text>
       </View>
     );
   }
 }
 
-export default connect(null)(Result);
+const mapStateToProps = ({ result }) => {
+  return result;
+}
+
+const styles = {
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#99bbff',
+  },
+  resultsLabel: {
+    marginTop: 10,
+    fontSize: 28,
+    backgroundColor: '#ffeb99',
+    fontFamily: 'Special-Elite',
+    color: 'black',
+    textAlign: 'center'
+  },
+  result: {
+    backgroundColor: '#db70b8',
+  },
+  tryAgainLabel: {
+    marginTop: 10,
+    fontFamily: 'Special-Elite',
+    fontSize: 32,
+    backgroundColor: '#85e085',
+    color: 'black',
+    textAlign: 'center',
+  },
+  quitLabel: {
+    marginTop: 10,
+    fontFamily: 'Special-Elite',
+    fontSize: 32,
+    backgroundColor: '#ff4d4d',
+    color: 'black',
+    textAlign: 'center',
+  }
+
+}
+
+export default connect(mapStateToProps)(Result);
