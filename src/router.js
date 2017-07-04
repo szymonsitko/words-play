@@ -1,6 +1,6 @@
 import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
-import { Welcome } from './components/containers/Welcome';
+import Welcome from './components/containers/Welcome';
 import Game from './components/containers/Game';
 
 

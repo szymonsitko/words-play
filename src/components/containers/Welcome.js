@@ -1,45 +1,72 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   Modal,
-  Dimensions
+  Dimensions,
+  TouchableHighlight
 } from 'react-native';
+import { INSTRUCTIONS } from '../../constants/constants';
 import Button from '../Button';
 import Form from '../Form';
 
 const { width, height } = Dimensions.get('window');
 
-export const Welcome = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.welcomeLabel}>
-        Welcome to WordsPlay !
-      </Text>
-      <Form
-        testFunction={getTestValue => {this.getTestValue = getTestValue}}
-        formStyle={styles.formStyle}
-        label="Put your word to start playing!"
-        buttonText="Start"
-      />
-        <Text onPress={() => console.log("Modal Here")} style={styles.credits}>Instructions</Text>
-    </View>
-  );
-}
+class Welcome extends Component {
+  state = {
+    modalVisibility: false
+  }
 
-const styles = StyleSheet.create({
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcomeLabel}>
+          Welcome to WordsPlay !
+        </Text>
+        <Form
+          formStyle={styles.formStyle}
+          label="Put your text to start playing!"
+          buttonText="Start"
+        />
+          <Modal
+            animationType={"slide"}
+            transparent={false}
+            visible={this.state.modalVisibility}
+            onRequestClose={() => {this.setState({ modalVisibility: false })}}
+            >
+           <View style={styles.modalStyles.container}>
+            <View>
+              <Text style={styles.modalStyles.instrucionsLabel}>Game Instructions</Text>
+              <Text style={styles.modalStyles.instructionsContent}>{INSTRUCTIONS}</Text>
+              <Text
+                style={styles.modalStyles.closeModalLabel}
+                onPress={() => {
+                  this.setState({ modalVisibility: !this.state.modalVisibility });
+                }}
+                >
+                Back to Main
+              </Text>
+            </View>
+           </View>
+          </Modal>
+          <Text onPress={() => this.setState({ modalVisibility: true })} style={styles.credits}>Instructions</Text>
+      </View>
+    );
+  }
+};
+
+const styles = {
   container: {
     flex: 1,
-    margin: 6,
     alignItems: 'center',
     backgroundColor: '#99bbff',
   },
   credits: {
     position: 'absolute',
     fontFamily: 'Special-Elite',
-    backgroundColor: '#ffeb99',
-    padding: 4,
+    backgroundColor: '#85e085',
+    padding: 8,
     fontSize: 18,
     left: 0,
     right: 0,
@@ -57,5 +84,38 @@ const styles = StyleSheet.create({
   },
   formStyle: {
     marginTop: height * .1
+  },
+  modalStyles: {
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      backgroundColor: '#99bbff',
+    },
+    instrucionsLabel: {
+      marginTop: 10,
+      fontSize: 28,
+      backgroundColor: '#ffeb99',
+      fontFamily: 'Special-Elite',
+      color: 'black',
+      textAlign: 'center'
+    },
+    instructionsContent: {
+      marginTop: 10,
+      fontSize: 20,
+      fontFamily: 'Special-Elite',
+      color: 'black',
+      backgroundColor: '#85e085',
+      textAlign: 'center'
+    },
+    closeModalLabel: {
+      marginTop: 10,
+      fontFamily: 'Special-Elite',
+      fontSize: 32,
+      backgroundColor: '#db70b8',
+      color: 'black',
+      textAlign: 'center',
+    }
   }
-});
+};
+
+export default Welcome;

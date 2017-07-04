@@ -73,7 +73,7 @@ class Game extends Component {
       if (this.state.passedInput) {
         !isNaN(this.state.inputText) ? renderTag = <Text style={styles.hintLabel}>{tagGenerator(this.state.scoreToWin, this.state.inputText)}</Text> : renderTag = <Text style={{ ...styles.hintLabel, color: 'red' }}>This is not a number, sorry!</Text>;
       } else {
-        renderTag = <Text>Give it a shot right now!</Text>;
+        renderTag = <Text style={styles.hintLabel}>Give it a shot right now!</Text>;
       }
     }
     return renderTag;
@@ -103,7 +103,6 @@ class Game extends Component {
 const styles = {
   container: {
     flex: 1,
-    margin: 6,
     alignItems: 'center',
     backgroundColor: '#99bbff',
   },
