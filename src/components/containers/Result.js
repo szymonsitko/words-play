@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, BackHandler, Dimensions } from 'react-native';
+import { View, Text, BackHandler, Dimensions, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { resetUserScoreData } from '../../actions'
@@ -23,11 +23,15 @@ class Result extends Component {
           colors={NAVBAR_COLORS}
         />
         <Text style={styles.resultsLabel}>You <Text style={styles.result}>{this.props.userWon ? 'won' : 'lost'}</Text> the game!</Text>
-        <ScoreBoard
-          scoreTarget={this.props.scoreTarget}
-          timeTotal={this.props.timeTotal}
-          timeLeft={this.props.timeLeft}
-        />
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ marginBottom: 58 }}>
+          <ScoreBoard
+            scoreTarget={this.props.scoreTarget}
+            timeTotal={this.props.timeTotal}
+            timeLeft={this.props.timeLeft}
+          />
+        </ScrollView>
         <View style={{position: 'absolute', left: 0, right: 0, bottom: 0, flexDirection: 'row'}}>
           <Text style={styles.tryAgainLabel} onPress={this.resetGame.bind(this)}>Try again</Text>
           <Text style={styles.quitLabel} onPress={() => {BackHandler.exitApp()} }>Quit</Text>
@@ -50,7 +54,7 @@ const styles = {
   resultsLabel: {
     marginTop: 18,
     marginBottom: 18,
-    fontSize: 28,
+    fontSize: 32,
     backgroundColor: '#ffeb99',
     fontFamily: 'Special-Elite',
     color: 'black',

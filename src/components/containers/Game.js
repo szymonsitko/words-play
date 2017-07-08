@@ -79,7 +79,7 @@ class Game extends Component {
         });
         this.startCountdownTimer();
       }
-    }, 1000);
+    }, 1500);
   }
 
   startCountdownTimer() {
