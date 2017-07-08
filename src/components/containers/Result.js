@@ -36,7 +36,7 @@ const styles = {
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#99bbff',
+    backgroundColor: '#ccddff',
   },
   resultsLabel: {
     marginTop: 10,

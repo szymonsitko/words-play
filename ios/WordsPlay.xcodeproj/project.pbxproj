@@ -37,6 +37,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		C469076CD44542738DD1CBB0 /* 9-wW4zu3WNoD5Fjka35JmybsRidxnYrfzLNRqJkHfFo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0254B5204A65478F888F9784 /* 9-wW4zu3WNoD5Fjka35JmybsRidxnYrfzLNRqJkHfFo.ttf */; };
 		3A7837E8EE1545D48A350567 /* Special-Elite.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FFF04A9F8A8647E8B4041C04 /* Special-Elite.ttf */; };
+		EAD8FAF9AA184E3E9C1DA878 /* Hind.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3F39447CA45146EF8D7AC494 /* Hind.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,6 +259,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		0254B5204A65478F888F9784 /* 9-wW4zu3WNoD5Fjka35JmybsRidxnYrfzLNRqJkHfFo.ttf */ = {isa = PBXFileReference; name = "9-wW4zu3WNoD5Fjka35JmybsRidxnYrfzLNRqJkHfFo.ttf"; path = "../assets/fonts/9-wW4zu3WNoD5Fjka35JmybsRidxnYrfzLNRqJkHfFo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		FFF04A9F8A8647E8B4041C04 /* Special-Elite.ttf */ = {isa = PBXFileReference; name = "Special-Elite.ttf"; path = "../assets/fonts/Special-Elite.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3F39447CA45146EF8D7AC494 /* Hind.ttf */ = {isa = PBXFileReference; name = "Hind.ttf"; path = "../assets/fonts/Hind.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,6 +494,7 @@
 			children = (
 				0254B5204A65478F888F9784 /* 9-wW4zu3WNoD5Fjka35JmybsRidxnYrfzLNRqJkHfFo.ttf */,
 				FFF04A9F8A8647E8B4041C04 /* Special-Elite.ttf */,
+				3F39447CA45146EF8D7AC494 /* Hind.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -857,6 +860,7 @@
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				C469076CD44542738DD1CBB0 /* 9-wW4zu3WNoD5Fjka35JmybsRidxnYrfzLNRqJkHfFo.ttf in Resources */,
 				3A7837E8EE1545D48A350567 /* Special-Elite.ttf in Resources */,
+				EAD8FAF9AA184E3E9C1DA878 /* Hind.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

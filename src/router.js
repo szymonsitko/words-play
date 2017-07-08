@@ -3,7 +3,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import Welcome from './components/containers/Welcome';
 import Game from './components/containers/Game';
 import Result from './components/containers/Result';
-
+import Navigation from './components/Navigation';
 
 export const RouterComponent = () => {
   return (

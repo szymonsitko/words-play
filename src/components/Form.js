@@ -22,12 +22,13 @@ class Form extends Component {
       const rawInput = this.state.inputText;
       const cleanedInput = inputCleaner(this.state.inputText);
       this.props.onFormSubmit(rawInput, cleanedInput);
+    } else {
+      this.setState({ displayWarning: true });
     }
   }
 
-
   displayWarning() {
-    if (this.state.enableMessages && this.state.inputText.length < 1) {
+    if (this.state.enableMessages && this.state.inputText.length < 1 || this.state.displayWarning) {
     return (
       <Text style={styles.warningLabel}>
         Word must be longer than zero characters!
@@ -38,19 +39,25 @@ class Form extends Component {
 
   render() {
     return (
-      <View style={styles.formStyle}>
-        <Text style={styles.labelStyle}>{this.props.label}</Text>
+      <View style={styles.container}>
+        <Text style={styles.formLabel}>{this.props.label}</Text>
         <TextInput
-          style={styles.inputStyle}
+          style={styles.inputField}
+          underlineColorAndroid='transparent'
+          placeholder="eg. Alphabet"
           onChangeText={(text) => {
             this.setState({
               enableMessages: true,
+              displayWarning: false,
               inputText: text
             });
           }}
           value={this.state.inputText}
       />
-        <Button style={styles} onPress={() => this.validateUserInput()}>{this.props.buttonText}</Button>
+        <Button
+          title={this.props.buttonText}
+          onPress={() => this.validateUserInput()}
+        />
         {this.displayWarning()}
       </View>
     );
@@ -58,37 +65,32 @@ class Form extends Component {
 }
 
 const styles = {
-  formStyle: {
-    marginTop: height * .1
+  container: {
+    marginLeft: width * .1,
+    marginRight: width * .1,
   },
-  inputStyle: {
-    height: 40,
-    padding: 6,
-    marginTop: height * .05,
-    marginBottom: height * .05,
-    fontSize: 18
-  },
-  labelStyle: {
-    marginTop: 10,
-    fontSize: 22,
-    backgroundColor: '#ffeb99',
+  formLabel: {
+    textAlign: 'center',
+    marginTop: 22,
+    fontSize: 28,
+    color: 'black',
     fontFamily: 'Special-Elite',
-    color: 'black'
+    backgroundColor: '#db70b8'
+  },
+  inputField: {
+    marginTop: 12,
+    height: 45,
+    fontFamily: 'Hind',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginLeft: width * .125,
+    marginRight: width * .125,
+    borderRadius: 4
   },
   warningLabel: {
     textAlign: 'center',
-    marginTop: 5
-  },
-  buttonTextStyle: {
-    fontFamily: 'Special-Elite',
-    justifyContent: 'center',
-    fontSize: 42,
-    backgroundColor: '#db70b8',
-    color: 'black',
-  },
-  buttonAnimationStyle: {
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    fontSize: 18,
+    marginTop: 10
   }
 }
 

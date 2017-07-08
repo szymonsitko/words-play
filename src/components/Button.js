@@ -3,16 +3,30 @@ import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
-const Button = ({ style, children, onPress }) => {
+const Button = ({ title, onPress }) => {
   return (
     <View>
-      <TouchableOpacity style={style.buttonAnimationStyle} onPress={onPress}>
-        <Text style={style.buttonTextStyle}>
-          {children}
+      <TouchableOpacity onPress={onPress}>
+        <Text style={styles.buttonStyle}>
+          {title}
         </Text>
       </TouchableOpacity>
     </View>
   );
+}
+
+const styles = {
+  buttonStyle: {
+    fontFamily: 'Special-Elite',
+    justifyContent: 'center',
+    fontSize: 36,
+    backgroundColor: '#ff4d4d',
+    color: 'black',
+    textAlign: 'center',
+    marginLeft: width * .2,
+    marginRight: width * .2,
+    marginTop: 24
+  }
 }
 
 export default Button;

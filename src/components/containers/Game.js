@@ -138,7 +138,7 @@ const styles = {
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#99bbff',
+    backgroundColor: '#ccddff',
   },
   hintLabel: {
     textAlign: 'center',
