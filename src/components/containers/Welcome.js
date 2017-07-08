@@ -12,10 +12,11 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { storeUserInput } from '../../actions';
 import { inputCleaner } from '../../lib/InputCleaner';
-import { INSTRUCTIONS } from '../../constants/constants';
+import { NAVBAR_COLORS } from '../../constants/constants';
 import Button from '../Button';
 import Form from '../Form';
 import Navigation from '../Navigation';
+import Credits from '../Credits';
 
 const { width, height } = Dimensions.get('window');
 
@@ -29,39 +30,26 @@ class Welcome extends Component {
     Actions.game();
   }
 
+  switchModalVisibility() {
+    this.setState({ modalVisibility: !this.state.modalVisibility });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Navigation
           label="Welcome to WordsPlay !"
-          colors={['#5E92FF', '#56E898', '#FFFE6B', '#E8A051', '#FF59A7']}
+          colors={NAVBAR_COLORS}
         />
         <Form
           onFormSubmit={this.onFormSubmit.bind(this)}
           label="Put your text to start playing!"
           buttonText="Start"
         />
-          <Modal
-            animationType={"slide"}
-            transparent={false}
-            visible={this.state.modalVisibility}
-            onRequestClose={() => {this.setState({ modalVisibility: false })}}
-            >
-           <View>
-            <ScrollView>
-              <Text>Game Instructions</Text>
-              <Text>{INSTRUCTIONS}</Text>
-              <Text
-                style={{ fontFamily: 'Hind' }}
-                onPress={() => {
-                  this.setState({ modalVisibility: !this.state.modalVisibility });
-                }}
-                >
-                Back to Main
-              </Text>
-            </ScrollView>
-           </View>
-          </Modal>
+          <Credits
+            modalVisible={this.state.modalVisibility}
+            toggleModal={this.switchModalVisibility.bind(this)}
+          />
           <Text style={styles.credits} onPress={() => this.setState({ modalVisibility: true })}>Instructions</Text>
       </View>
     );
@@ -80,7 +68,7 @@ const styles = {
     right: 0,
     bottom: 0,
     textAlign: 'center',
-    padding: 12,
+    padding: 10,
     fontSize: 22,
     backgroundColor: '#99bbff',
     color: '#001a4d',

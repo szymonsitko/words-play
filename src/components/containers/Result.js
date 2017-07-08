@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, BackHandler } from 'react-native';
+import { View, Text, BackHandler, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { resetUserScoreData } from '../../actions'
 import { ScoreBoard } from '../ScoreBoard';
+import Navigation from '../Navigation';
+import { NAVBAR_COLORS } from '../../constants/constants';
+
+const { width, height } = Dimensions.get('window');
 
 class Result extends Component {
   resetGame() {
-    // Here, all user data will be deleted & user will be sent to the main screen
     this.props.resetUserScoreData();
     Actions.init();
   }
@@ -15,14 +18,20 @@ class Result extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Navigation
+          label="Game Results"
+          colors={NAVBAR_COLORS}
+        />
         <Text style={styles.resultsLabel}>You <Text style={styles.result}>{this.props.userWon ? 'won' : 'lost'}</Text> the game!</Text>
         <ScoreBoard
           scoreTarget={this.props.scoreTarget}
           timeTotal={this.props.timeTotal}
           timeLeft={this.props.timeLeft}
         />
-        <Text style={styles.tryAgainLabel} onPress={this.resetGame.bind(this)}>Try again</Text>
-        <Text style={styles.quitLabel} onPress={() => {BackHandler.exitApp()} }>Quit</Text>
+        <View style={{position: 'absolute', left: 0, right: 0, bottom: 0, flexDirection: 'row'}}>
+          <Text style={styles.tryAgainLabel} onPress={this.resetGame.bind(this)}>Try again</Text>
+          <Text style={styles.quitLabel} onPress={() => {BackHandler.exitApp()} }>Quit</Text>
+        </View>
       </View>
     );
   }
@@ -39,8 +48,8 @@ const styles = {
     backgroundColor: '#ccddff',
   },
   resultsLabel: {
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 18,
+    marginBottom: 18,
     fontSize: 28,
     backgroundColor: '#ffeb99',
     fontFamily: 'Special-Elite',
@@ -51,22 +60,27 @@ const styles = {
     backgroundColor: '#db70b8',
   },
   tryAgainLabel: {
-    marginTop: 10,
+    flex: 1,
     fontFamily: 'Special-Elite',
-    fontSize: 32,
-    backgroundColor: '#85e085',
+    backgroundColor: '#ffeb99',
+    padding: 10,
+    fontSize: 24,
     color: 'black',
+    width: width * .5,
     textAlign: 'center',
+    padding: 10
   },
   quitLabel: {
-    marginTop: 10,
+    flex: 1,
     fontFamily: 'Special-Elite',
-    fontSize: 32,
     backgroundColor: '#ff4d4d',
+    padding: 10,
+    fontSize: 24,
     color: 'black',
+    width: width * .5,
     textAlign: 'center',
+    padding: 10
   }
-
 }
 
 export default connect(mapStateToProps, { resetUserScoreData })(Result);

@@ -44,7 +44,7 @@ class Form extends Component {
         <TextInput
           style={styles.inputField}
           underlineColorAndroid='transparent'
-          placeholder="eg. Alphabet"
+          placeholder="e.g. Alphabet"
           onChangeText={(text) => {
             this.setState({
               enableMessages: true,

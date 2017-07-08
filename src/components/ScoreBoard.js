@@ -15,20 +15,24 @@ export const ScoreBoard = (props) => {
 const styles = {
   container: {
     backgroundColor: 'pink',
-    borderRadius: 4,
     borderWidth: 2.5,
-    borderColor: '#ff6666',
-    padding: 8
+    borderColor: '#003cb3',
+    backgroundColor: '#001a4d',
+    marginTop: 12,
+    padding: 12,
   },
   gameBriefStyle: {
-    fontFamily: 'Special-Elite',
+    margin: 2,
+    fontFamily: 'Hind',
     textAlign: 'center',
-    fontSize: 16,
+    color: 'white',
+    fontSize: 18,
     padding: 2
   },
   resultLineStyle: {
-    fontFamily: 'Special-Elite',
-    fontSize: 12,
-    margin: 2
+    fontFamily: 'Hind',
+    color: 'white',
+    fontSize: 14,
+    margin: 4
   }
 }

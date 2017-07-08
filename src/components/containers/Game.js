@@ -58,9 +58,8 @@ class Game extends Component {
 
   resultCheck(text) {
     if (this.state.scoreToWin == text) {
-      const result = 'win';
       this.stopCountdownTimer();
-      this.setState({ preCounter: 'You won!', userWonGame: true });
+      this.setState({ preCounter: 'You won!', userWonGame: true, lockPanel: true });
       this.goToResultsPage();
     };
   }
@@ -88,9 +87,8 @@ class Game extends Component {
       timer: setInterval(() => {
         this.setState({ countdownTime: this.state.countdownTime - 1 });
         if (this.state.countdownTime <= 0) {
-          const result = 'loose';
           this.stopCountdownTimer();
-          this.setState({ preCounter: 'You lost!', userWonGame: false });
+          this.setState({ preCounter: 'You lost!', userWonGame: false, lockPanel: true });
           this.goToResultsPage();
         }
       }, 1000)
@@ -117,7 +115,12 @@ class Game extends Component {
     return (
       <View>
         <Text style={styles.insertedText}>You have inserted: {this.props.game.inputText}</Text>
-        <TextInput onChangeText={(text) => {this.setState({inputText: text, passedInput: true}); this.resultCheck(text); }}/>
+        <TextInput style={styles.guessInput} onChangeText={(text) => {
+          if (!this.state.lockPanel) {
+            this.setState({inputText: text, passedInput: true});
+            this.resultCheck(text);
+          }
+        }}/>
         {this.renderHint()}
       </View>
     );
@@ -128,7 +131,7 @@ class Game extends Component {
       <View style={styles.container}>
         <Text style={styles.preCounterLabel}>{this.state.preCounter}</Text>
         {this.state.renderCounterLabels ? this.renderCounterLabels() : !this.renderCounterLabels()}
-        <Text style={styles.counterLabel}> Just {this.state.countdownTime} seconds left!</Text>
+        <Text style={styles.counterLabel}> Just <Text style={{ fontWeight: 'bold'}}>{this.state.countdownTime}</Text> seconds left!</Text>
       </View>
     );
   };
@@ -142,15 +145,15 @@ const styles = {
   },
   hintLabel: {
     textAlign: 'center',
-    fontSize: 14,
-    marginTop: height *.005,
-    marginTop: height *.005,
+    fontSize: 18,
+    marginTop: 10,
+    fontWeight: 'bold'
   },
   counterLabel: {
     position: 'absolute',
     fontFamily: 'Special-Elite',
     backgroundColor: '#ffeb99',
-    padding: 4,
+    padding: 10,
     fontSize: 24,
     left: 0,
     right: 0,
@@ -160,7 +163,7 @@ const styles = {
   },
   insertedText: {
     fontFamily: 'Special-Elite',
-    fontSize: 22,
+    fontSize: 28,
     color: 'black',
     backgroundColor: '#db70b8',
   },
@@ -172,6 +175,16 @@ const styles = {
     marginTop: height * .05,
     marginBottom: height * .05,
     backgroundColor: '#ff4d4d'
+  },
+  guessInput: {
+    marginTop: 12,
+    height: 45,
+    fontFamily: 'Hind',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginLeft: width * .125,
+    marginRight: width * .125,
+    borderRadius: 4
   }
 }
 

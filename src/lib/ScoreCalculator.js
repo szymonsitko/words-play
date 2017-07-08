@@ -8,7 +8,7 @@ export const scoreCalculator = cleanInput => {
 }
 
 export const timeCalculator = input => {
-  return input.length * 2;
+  return (input.length * 2) + 2;
 }
 
 export const tagGenerator = (score, givenResult) => {

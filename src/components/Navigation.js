@@ -23,7 +23,7 @@ const styles = {
     backgroundColor: 'red',
     flexDirection: 'row',
     width: width,
-    height: height * .1,
+    height: height * .125,
   },
   centerLabel: {
     position: 'absolute',
@@ -36,7 +36,7 @@ const styles = {
   },
   mainLabel: {
     fontFamily: 'Hind',
-    fontSize: 22,
+    fontSize: 26,
     color: 'white'
   },
   firstSeparator: {
