@@ -11,11 +11,9 @@ export const RouterComponent = () => {
       <Scene key="init" >
         <Scene initial key="welcome" component={Welcome} hideNavBar={true} />
       </Scene>
-
       <Scene key="game">
         <Scene initial key="action" component={Game} hideNavBar={true} />
       </Scene>
-
       <Scene key="result">
         <Scene initial key="score" component={Result} hideNavBar={true} />
       </Scene>

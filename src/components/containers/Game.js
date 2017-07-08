@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Dimensions,
+  BackHandler,
+  ToastAndroid
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { storeGameResult } from '../../actions';
@@ -19,6 +26,19 @@ class Game extends Component {
 
   componentWillMount() {
     this.preCountingMessage();
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    ToastAndroid.show('Cannot go back while playing!', ToastAndroid.SHORT);
+    return true;
   }
 
   goToResultsPage() {

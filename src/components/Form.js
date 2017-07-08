@@ -6,9 +6,6 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
-import { storeUserInput } from '../actions';
 import { inputCleaner } from '../lib/InputCleaner';
 import Button from './Button';
 
@@ -17,24 +14,20 @@ const { width, height } = Dimensions.get('window');
 class Form extends Component {
   state = {
     inputText: '',
-    cleanInput: '',
-    displayWarning: false
+    enableMessages: false
   }
 
-  acceptUserInput() {
-    if (this.state.inputText < 1) {
-      this.setState({ displayWarning: true });
-    } else {
-      this.setState({ displayWarning: false });
+  validateUserInput() {
+    if (this.state.inputText.length > 0) {
       const rawInput = this.state.inputText;
       const cleanedInput = inputCleaner(this.state.inputText);
-      this.props.storeUserInput(rawInput, cleanedInput);
-      Actions.game({ reset: true });
+      this.props.onFormSubmit(rawInput, cleanedInput);
     }
   }
 
+
   displayWarning() {
-    if (this.state.displayWarning) {
+    if (this.state.enableMessages && this.state.inputText.length < 1) {
     return (
       <Text style={styles.warningLabel}>
         Word must be longer than zero characters!
@@ -45,14 +38,19 @@ class Form extends Component {
 
   render() {
     return (
-      <View style={this.props.formStyle}>
+      <View style={styles.formStyle}>
         <Text style={styles.labelStyle}>{this.props.label}</Text>
         <TextInput
-        style={styles.inputStyle}
-        onChangeText={(text) => this.setState({inputText: text})}
-        value={this.state.inputText}
+          style={styles.inputStyle}
+          onChangeText={(text) => {
+            this.setState({
+              enableMessages: true,
+              inputText: text
+            });
+          }}
+          value={this.state.inputText}
       />
-        <Button style={styles} onPress={() => this.acceptUserInput()}>{this.props.buttonText}</Button>
+        <Button style={styles} onPress={() => this.validateUserInput()}>{this.props.buttonText}</Button>
         {this.displayWarning()}
       </View>
     );
@@ -60,8 +58,8 @@ class Form extends Component {
 }
 
 const styles = {
-  frameStyle: {
-
+  formStyle: {
+    marginTop: height * .1
   },
   inputStyle: {
     height: 40,
@@ -94,8 +92,4 @@ const styles = {
   }
 }
 
-const mapStateToProps = ({ game }) => {
-  return game;
-}
-
-export default connect(mapStateToProps, { storeUserInput })(Form);
+export default Form;

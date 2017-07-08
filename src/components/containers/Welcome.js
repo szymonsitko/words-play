@@ -8,6 +8,10 @@ import {
   TouchableHighlight,
   ScrollView
 } from 'react-native';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { storeUserInput } from '../../actions';
+import { inputCleaner } from '../../lib/InputCleaner';
 import { INSTRUCTIONS } from '../../constants/constants';
 import Button from '../Button';
 import Form from '../Form';
@@ -19,6 +23,11 @@ class Welcome extends Component {
     modalVisibility: false
   }
 
+  onFormSubmit(rawInput, cleanInput) {
+    this.props.storeUserInput(rawInput, cleanInput);
+    Actions.game();
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -27,6 +36,7 @@ class Welcome extends Component {
         </Text>
         <Form
           formStyle={styles.formStyle}
+          onFormSubmit={this.onFormSubmit.bind(this)}
           label="Put your text to start playing!"
           buttonText="Start"
         />
@@ -83,9 +93,6 @@ const styles = {
     marginTop: height * .05,
     backgroundColor: '#ff4d4d'
   },
-  formStyle: {
-    marginTop: height * .1
-  },
   modalStyles: {
     container: {
       flex: 1,
@@ -119,4 +126,4 @@ const styles = {
   }
 };
 
-export default Welcome;
+export default connect(null, { storeUserInput })(Welcome);
