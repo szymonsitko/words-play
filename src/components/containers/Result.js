@@ -53,7 +53,6 @@ const styles = {
   },
   resultsLabel: {
     marginTop: 18,
-    marginBottom: 18,
     fontSize: 32,
     backgroundColor: '#ffeb99',
     fontFamily: 'Special-Elite',

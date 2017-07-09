@@ -5,7 +5,8 @@ import {
   TextInput,
   Dimensions,
   BackHandler,
-  ToastAndroid
+  ToastAndroid,
+  ScrollView
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -110,7 +111,7 @@ class Game extends Component {
 
   renderCounterLabels() {
     return (
-      <View>
+      <ScrollView>
         <Text style={styles.insertedText}>You have inserted: {this.props.game.inputText}</Text>
         <TextInput
           style={styles.guessInput}
@@ -122,7 +123,7 @@ class Game extends Component {
             }
         }}/>
         {this.renderHint()}
-      </View>
+      </ScrollView>
     );
   }
 
@@ -165,6 +166,7 @@ const styles = {
     fontFamily: 'Special-Elite',
     fontSize: 28,
     color: 'black',
+    textAlign: 'center',
     backgroundColor: '#db70b8',
   },
   preCounterLabel: {

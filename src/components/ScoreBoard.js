@@ -15,34 +15,30 @@ export const ScoreBoard = (props) => {
 
 const styles = {
   container: {
-    borderWidth: 4,
-    borderColor: '#003cb3',
-    backgroundColor: 'white',
     marginTop: 18,
     marginBottom: 8,
     padding: 14
   },
   gameBriefStyle: {
-    marginTop: 8,
-    marginBottom: 4,
+    marginBottom: 12,
     fontFamily: 'Hind',
     textAlign: 'center',
-    color: '#003399',
+    color: '#001133',
     fontSize: 20,
     padding: 4,
     fontWeight: 'bold'
   },
   resultLineStyle: {
     fontFamily: 'Hind',
-    color: '#003399',
+    color: '#001133',
     fontSize: 16,
     margin: 4
   },
   goodLuckMessage: {
     fontFamily: 'Hind',
-    color: '#003399',
+    color: '#001133',
     fontSize: 16,
-    marginTop: 8,
+    marginTop: 12,
     marginBottom: 8,
     textAlign: 'center',
     fontWeight: 'bold'
