@@ -18,9 +18,9 @@ class Form extends Component {
   }
 
   validateUserInput() {
-    if (this.state.inputText.length > 0) {
-      const rawInput = this.state.inputText;
-      const cleanedInput = inputCleaner(this.state.inputText);
+    const rawInput = this.state.inputText;
+    const cleanedInput = inputCleaner(this.state.inputText);
+    if (cleanedInput.length > 0) {
       this.props.onFormSubmit(rawInput, cleanedInput);
     } else {
       this.setState({ displayWarning: true });
@@ -31,7 +31,7 @@ class Form extends Component {
     if (this.state.enableMessages && this.state.inputText.length < 1 || this.state.displayWarning) {
     return (
       <Text style={styles.warningLabel}>
-        Word must be longer than zero characters!
+        Word must be longer than zero characters and must contain letters!
       </Text>
       );
     }

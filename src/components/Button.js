@@ -19,7 +19,7 @@ const styles = {
   buttonStyle: {
     fontFamily: 'Special-Elite',
     justifyContent: 'center',
-    fontSize: 36,
+    fontSize: 42,
     backgroundColor: '#ff4d4d',
     color: 'black',
     textAlign: 'center',

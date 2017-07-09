@@ -43,9 +43,6 @@ class Game extends Component {
 
   goToResultsPage() {
     sleep(2500).then(() => {
-      const gameAnalytics = {
-
-      };
       this.props.storeGameResult({
         scoreTarget: this.state.scoreToWin,
         timeTotal: timeCalculator(this.props.game.cleanInput),
@@ -115,11 +112,14 @@ class Game extends Component {
     return (
       <View>
         <Text style={styles.insertedText}>You have inserted: {this.props.game.inputText}</Text>
-        <TextInput style={styles.guessInput} onChangeText={(text) => {
-          if (!this.state.lockPanel) {
-            this.setState({inputText: text, passedInput: true});
-            this.resultCheck(text);
-          }
+        <TextInput
+          style={styles.guessInput}
+          placeholder="Your guess"
+          onChangeText={(text) => {
+            if (!this.state.lockPanel) {
+              this.setState({inputText: text, passedInput: true});
+              this.resultCheck(text);
+            }
         }}/>
         {this.renderHint()}
       </View>
