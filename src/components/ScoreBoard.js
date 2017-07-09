@@ -17,29 +17,30 @@ const styles = {
   container: {
     borderWidth: 4,
     borderColor: '#003cb3',
-    backgroundColor: '#001a4d',
+    backgroundColor: 'white',
     marginTop: 18,
     marginBottom: 8,
     padding: 14
   },
   gameBriefStyle: {
-    margin: 4,
+    marginTop: 8,
+    marginBottom: 4,
     fontFamily: 'Hind',
     textAlign: 'center',
-    color: 'white',
+    color: '#003399',
     fontSize: 20,
     padding: 4,
     fontWeight: 'bold'
   },
   resultLineStyle: {
     fontFamily: 'Hind',
-    color: 'white',
+    color: '#003399',
     fontSize: 16,
     margin: 4
   },
   goodLuckMessage: {
     fontFamily: 'Hind',
-    color: 'white',
+    color: '#003399',
     fontSize: 16,
     marginTop: 8,
     marginBottom: 8,

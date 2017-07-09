@@ -37,7 +37,7 @@ class Game extends Component {
   }
 
   handleBackButton() {
-    ToastAndroid.show('Cannot go back while playing!', ToastAndroid.SHORT);
+    ToastAndroid.show('Cannot go back after game has started!', ToastAndroid.SHORT);
     return true;
   }
 
@@ -145,7 +145,7 @@ const styles = {
   },
   hintLabel: {
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 20,
     marginTop: 10,
     fontWeight: 'bold'
   },
@@ -180,7 +180,7 @@ const styles = {
     marginTop: 12,
     height: 45,
     fontFamily: 'Hind',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     marginLeft: width * .125,
     marginRight: width * .125,
