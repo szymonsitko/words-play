@@ -21,4 +21,4 @@ Not much to do, as fun project (mainly to learn RN concepts), it is just for lea
 
 Welcome Screen             |  Game Action Screen
 :-------------------------:|:-------------------------:
-![](./readme/welcome.jpg)  |  ![](./readme/game.jpg)
+<img src="./readme/welcome.jpg" width="280" />  |  <img src="./readme/game.jpg" width="280" />
