@@ -18,9 +18,7 @@ The application is still in development, however if you are RN developer you can
 Not much to do, as fun project (mainly to learn RN concepts), it is just for learning purposes.
 
 ## Screenshots
-<section>
-    <img src="./readme/welcome.jpg" width="320" />
-    <img src="./readme/game.jpg" width="320" />
-</section>
 
-
+Solarized dark             |  Solarized Ocean
+:-------------------------:|:-------------------------:
+![](./readme/welcome.jpg)  |  ![](./readme/game.jpg)
