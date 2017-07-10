@@ -19,10 +19,10 @@ Not much to do, as fun project (mainly to learn RN concepts), it is just for lea
 
 ## Screenshots
 <div>
-    <div class="imgContainer">
-        <img src="./readme/welcome.jpg" width="320" style="float:left;"/>
+    <div class="imgContainer" style="float:left;">
+        <img src="./readme/welcome.jpg" width="320" />
     </div>
-    <div class="imgContainer">
-        <img src="./readme/game.jpg" width="320" style="float:left;"/>
+    <div class="imgContainer" style="float:right;">
+        <img src="./readme/game.jpg" width="320" />
     </div>
 </div>
