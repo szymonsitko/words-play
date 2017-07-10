@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, BackHandler, Dimensions, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  BackHandler,
+  Dimensions,
+  ScrollView,
+  ToastAndroid
+} from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { resetUserScoreData } from '../../actions'
@@ -10,6 +17,20 @@ import { NAVBAR_COLORS } from '../../constants/constants';
 const { width, height } = Dimensions.get('window');
 
 class Result extends Component {
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    ToastAndroid.show('Please press Try Again or Quit to navigate', ToastAndroid.SHORT);
+    return true;
+  }
+
   resetGame() {
     this.props.resetUserScoreData();
     Actions.init();

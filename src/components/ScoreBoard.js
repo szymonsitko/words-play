@@ -23,20 +23,20 @@ const styles = {
     marginBottom: 12,
     fontFamily: 'Hind',
     textAlign: 'center',
-    color: '#001133',
+    color: 'black',
     fontSize: 20,
     padding: 4,
     fontWeight: 'bold'
   },
   resultLineStyle: {
     fontFamily: 'Hind',
-    color: '#001133',
+    color: 'black',
     fontSize: 16,
     margin: 4
   },
   goodLuckMessage: {
     fontFamily: 'Hind',
-    color: '#001133',
+    color: 'black',
     fontSize: 16,
     marginTop: 12,
     marginBottom: 8,

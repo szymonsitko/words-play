@@ -51,6 +51,7 @@ class Game extends Component {
         userWon: this.state.userWonGame
       });
       Actions.result();
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     });
   }
 
