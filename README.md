@@ -18,11 +18,11 @@ The application is still in development, however if you are RN developer you can
 Not much to do, as fun project (mainly to learn RN concepts), it is just for learning purposes.
 
 ## Screenshots
-<div style="float:left;">
+<div>
     <div class="imgContainer">
-        <img src="./readme/welcome.jpg" width="320"/>
+        <img src="./readme/welcome.jpg" width="320" style="float:left;"/>
     </div>
     <div class="imgContainer">
-        <img src="./readme/game.jpg" width="320"/>
+        <img src="./readme/game.jpg" width="320" style="float:left;"/>
     </div>
 </div>
