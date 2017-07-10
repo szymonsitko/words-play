@@ -19,6 +19,6 @@ Not much to do, as fun project (mainly to learn RN concepts), it is just for lea
 
 ## Screenshots
 
-Solarized dark             |  Solarized Ocean
+Welcome Screen             |  Game Action Screen
 :-------------------------:|:-------------------------:
 ![](./readme/welcome.jpg)  |  ![](./readme/game.jpg)
