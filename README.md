@@ -5,7 +5,7 @@
 An educational game written in React-Native for the Android platform (iOS version is expected in near future).
 The idea for game was born on the fly, so whole project is not really serious, especially considering game layout.
 
-## Tech Talk
+## Tech Stack
 
 Tech-stack for application consists of React-Native (of course), react-redux and react-native-router-flux. There is no database plugged into back-end, just playing around with reducers & built-in data persistence.
 
@@ -18,11 +18,11 @@ The application is still in development, however if you are RN developer you can
 Not much to do, as fun project (mainly to learn RN concepts), it is just for learning purposes.
 
 ## Screenshots
-<div>
-    <div class="imgContainer" style="float:left;margin-right: 24px;margin-left: 8px">
+<div style="float:left;">
+    <div class="imgContainer">
         <img src="./readme/welcome.jpg" width="320"/>
     </div>
-    <div class="imgContainer" style="float:left;margin-left: 24px">
+    <div class="imgContainer">
         <img src="./readme/game.jpg" width="320"/>
     </div>
 </div>
